@@ -1,0 +1,108 @@
+# Analysis of FitBit Fitness Tracker Data for Bellabeat
+####  by Matthew Clakley
+
+<br> 
+
+#### **About Bellabeat**
+
+Urška Sršen and Sando Mur founded Bellabeat, a high-tech company that manufactures health-focused smart products. Sršen used her background as an artist to develop beautifully designed technology that informs and inspires women around the world. Collecting data on activity, sleep, stress, and reproductive health has allowed Bellabeat to empower women with knowledge about their own health and habits. Since it was founded in 2013, Bellabeat has grown rapidly and quickly positioned itself as a tech-driven wellness company for women.
+
+Sršen knows that an analysis of Bellabeat’s available consumer data would reveal more opportunities for growth. She has asked the marketing analytics team to focus on a Bellabeat product and analyze smart device usage data in order to gain insight into how people are already using their smart devices. Then, using this information, she would like high-level recommendations for how these trends can inform Bellabeat marketing strategy.
+
+<br>
+
+##### *Key Question*
+How can trends in smart device usage help the Bellabeat marketing team develop a more successful marketing strategy?
+
+<br>
+
+##### *Business Task*
+I will use publicly available smart device user data to discover trends in usage in order to assist the Bellabeat marketing team in understanding their prospect pool so that they can create more successful ad campaigns.
+
+<br> 
+
+##### *Dataset Used*
+I used the [FitBit Fitness Tracker Data](https://www.kaggle.com/arashnic/fitbit) to gain insights for this case study.
+
+```{r include=FALSE}
+library(tidyverse)
+library(lubridate)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+setwd("~/Data Analysis/Bellabeat Project Data/Fitabase Data 4.12.16-5.12.16")
+dir()
+activity <- read_csv("dailyActivity_merged.csv")
+calories <- read_csv("dailyCalories_merged.csv")
+sleep <- read_csv("sleepDay_merged.csv")
+```
+
+
+<br>
+
+
+#### **Exploring the Data**
+
+<br>
+
+##### *Summary of Daily Activity*
+```{r}
+summary(activity$TotalSteps)
+summary(activity$SedentaryMinutes)
+summary(activity$LightlyActiveMinutes)
+summary(activity$FairlyActiveMinutes)
+summary(activity$VeryActiveMinutes)
+summary(activity$Calories)
+```
+##### *Summary of Calories*
+```{r}
+summary(calories$Calories)
+```
+##### *Summary of Sleep*
+```{r}
+summary(sleep$TotalMinutesAsleep)
+summary(sleep$TotalTimeInBed)
+```
+
+<br>
+
+#### *Insights from Data*
+
+<br>
+
+##### **Activity**
+
+This table demonstrates both mean and median activity levels
+
+Activity Level  | Mean Minutes |  Median Minutes
+------------- | ------------- | ------------- 
+Sedentary/Sleeping  | 1212.4 | 1231.0
+Lightly Active  | 192.8 |  199.0
+Fairly Active  | 13.6 |  6.0
+Very Active  | 21.2 |  4.0
+
+As we can see from this table, there is a considerable difference between mean and median activity levels. This is likely due to outlier days of higher activity level skewing the mean data. If Bellabeat's goal is to promote consistent activity, the median value is likely a more useful metric to track. The CDC [recommends](https://www.cdc.gov/physicalactivity/basics/adults/index.htm) 150 minutes of moderate or 75 minutes of vigorous activity per week (21.4 and 10.7 minutes per day, respectively). Median activity levels are falling well short of CDC recommendations. Based off of this information, I recommend Bellabeat encourage users to increase their Fairly Active and Very Active minutes on a more consistent basis. Suggesting consistent daily activity of roughly 21 minutes of moderate or 10 minutes of vigorous activity per day may present activity targets as more manageable, as well as promote more consistent daily use of Bellabeat's platform. Advertisements that showcase fun and short bursts of moderate-to-vigorous intensity activities as a means to hit a daily targets could paint Bellabeat as both fun and approachable.
+
+<br>
+
+##### **Sleep**
+
+![](Time Spent in Bed not Asleep.png)
+
+On average, users spent about 39 minutes in bed awake. Only 19% of users spent 15 minutes or less in bed awake, while 52% of users spent over 25 minutes in bed awake. This may indicate that Bellabeat users struggle with falling asleep once in bed. This may be an issue that many of Bellabeat's prospective users struggle with as well. [Studies show](https://www.healthline.com/health/healthy-sleep/how-long-does-it-take-to-fall-asleep#normal-sleep) that the recommended time to fall asleep is 10-20 minutes, and sleep quality may decrease if it takes you longer than a half hour to fall asleep. As sleep is an important part of health, Bellabeat may want to consider adding sleep reminders and resources intended to help users fall asleep, such as meditation music and breathing techniques to expedite the process of falling asleep.
+
+<br>
+
+#### **Summary of Recommendations**
+
+After examining fitbit data for the purposes of Bellabeat's marketing endeavours, it is my recommendation that Bellabeat highlight the importance and convenience of consistent, achievable moderate-to-high intensity workouts in order to meet weekly CDC targets. Showcasing shorter, more intense activities as a means of saving time for busy working women would likely be appealing for Bellabeat's target audience. 
+
+In addition, the health tracker sleep data demonstrates that many users spend longer in bed awake than is considered optimal in sleep studies. Given the apparent prevalence of sleep issues in the dataset, advertising Bellabeat's sleep tracking utility and resources that the Bellabeat platform has to aid in falling asleep are also likely to be successful in driving traffic to Bellabeat.
+
+<br>
+
+##### *Sources*
+
+1. https://www.kaggle.com/arashnic/fitbit
+2. https://www.cdc.gov/physicalactivity/basics/adults/index.htm
+3. https://www.healthline.com/health/healthy-sleep/how-long-does-it-take-to-fall-asleep#normal-sleep
